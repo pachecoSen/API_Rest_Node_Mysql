@@ -1,22 +1,11 @@
-const express = require('express');
-const app = express();
-
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-
-//Configuracion
-app.set('port', process.env.PORT || 3000);
-
-//Middlewares
-app.use(morgan('dev'));
-app.use(bodyParser.json());
+const app = require('./src/server');
 
 //Rutas
-require('./ruta/user_ruta.js')(app);
+require('./ruta/inicio_ruta')(app);
 
 app.listen(
 	app.get('port'),
 	() => {
-		console.log('Servidor Iniciado en Puerto: 3000');
+		console.log('\nServidor Iniciado en Puerto: ' + app.settings.port);
 	}
 );
