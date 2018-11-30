@@ -1,23 +1,24 @@
-const path = require('path');
-const dbConnection = require(path.join(__dirname,'../src/mysql'));
-
 module.exports = function(app) {
-	const connection = dbConnection();
 	app.get('/', (req, res) => {
 		res.redirect('/home');
 	});
 
 	app.get('/home', (req, res) => {
-		var statusDB = connection.connect();
 		res.json({
 			Info : {
 				APP : "Demo Node & MySQL",
-				Version : 0.1
+				Version : 0.1,
+				"Rutas (GET)" : req.get('host')+'/info'
 			}
 		});
 	});
 
-	app.get('/user', (req, res) => {
-		
+	app.get('/info', (req, res) => {
+		res.json({
+			URL : {
+				"Version de MySQL (GET)" : req.get('host')+'/mysql/version',
+				"Persona (GET)" : req.get('host')+'/persona'
+			}
+		});
 	});
 }
