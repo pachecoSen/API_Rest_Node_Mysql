@@ -8,7 +8,7 @@ module.exports = function(app) {
 			Info : {
 				APP : "Demo Node & MySQL",
 				Version : 0.1,
-				"Rutas (GET)" : req.get('host')+'/info'
+				"Rutas (GET)" : req.protocol+'://'+req.get('host')+'/info'
 			}
 		});
 	});
@@ -16,8 +16,8 @@ module.exports = function(app) {
 	app.get('/info', (req, res) => {
 		res.json({
 			URL : {
-				"Version de MySQL (GET)" : req.get('host')+'/mysql/version',
-				"Persona (GET)" : req.get('host')+'/persona'
+				"Version de MySQL (GET)" : req.protocol+'://'+req.get('host')+'/mysql/version',
+				"Persona (GET)" : req.protocol+'://'+req.get('host')+'/persona'
 			}
 		});
 	});

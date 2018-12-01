@@ -11,19 +11,19 @@ mysqlModel.getPersona = (inData, callback) => {
 		db.query(
 			"SELECT * FROM persona "+sqlTxt+" ORDER BY Apellido_paterno",
 			(err, rows) => {
-				if(err)
-					throw err;
+				if(err){
+					console.log(err);
+					callback(null, {Err : "Error en consulta de datos."});
+
+					return false;
+				}
 				callback(null, JSON.parse(JSON.stringify(rows)));
 			}
 		);
 
 		return false; 
 	}
-	(err, rows) => {
-		if(err)
-			throw err;
-		callback(null, {Error : 'Fallos de la Base de Datos'});
-	}
+	mysqlError.errConexion(err);
 };
 
 mysqlModel.newPersona = (inData, callback) => {
@@ -32,8 +32,12 @@ mysqlModel.newPersona = (inData, callback) => {
 	 	db.query(
 	 		sqlTxt, [inData],
 	 		(err, result) => {
-				if(err)
-					throw err;
+				if(err){
+					console.log(err);
+					callback(null, {Err : "Error en ingreso de datos."});
+
+					return false;
+				}
 				callback(null,
 					{
 						Msg : 'OK',
@@ -48,11 +52,7 @@ mysqlModel.newPersona = (inData, callback) => {
 
 	 	return false;
 	}
-	(err, rows) => {
-		if(err)
-			throw err;
-		callback(null, {Error : 'Fallos de la Base de Datos'});
-	}
+	mysqlError.errConexion(err);
 };
 
 module.exports = mysqlModel;

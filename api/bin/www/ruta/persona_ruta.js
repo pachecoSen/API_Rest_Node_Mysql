@@ -6,9 +6,9 @@ module.exports = function(app) {
 	app.get('/persona', (req, res) => {
 		res.json({
 			URL : {
-				"Todas las personas (GET)" : req.get('host')+'/persona/data',
-				"Buscar persona (GET)" : req.get('host')+'/persona/data/<search>',
-				"Nueva persona (POST)" : req.get('host')+'/persona/new'
+				"Todas las personas (GET)" : req.protocol+'://'+req.get('host')+'/persona/data',
+				"Buscar persona (GET)" : req.protocol+'://'+req.get('host')+'/persona/data/<search>',
+				"Nueva persona (POST)" : req.protocol+'://'+req.get('host')+'/persona/new'
 			}
 		});
 	});
